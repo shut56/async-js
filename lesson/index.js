@@ -148,4 +148,15 @@ Object.defineProperty(car, 'chairs', {
 
 car.chairs = false;
 
-console.log(car);
+// console.log(car);
+
+const numberList = [1, 2, 3, 4];
+const newNumbers = [5, 6, 7, 8, 9];
+
+const newList = [...numberList, ...newNumbers, 0, 10, 11, 12];
+
+// console.log(newList);
+
+const newList2 = numberList.concat(newNumbers, [0]);
+
+console.log(newList2);
