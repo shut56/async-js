@@ -1,32 +1,57 @@
-const task = {
-  id: '',
-  text: '',
-  isDone: false,
-  createdAt: '',
-  updatedAt: '',
-  isDeleted: false,
-};
+const usersUrl = 'https://jsonplaceholder.typicode.com/users';
 
-let taskList = [];
+const result = fetch(usersUrl)
+  .then((response) => {
+    // console.log('RESPONSE', response);
+    return response.json();
+  })
+  .then((users) => {
+    const userNames = users.map(({ name, phone }) => ({ name, phone }));
 
-const createBtn = document.getElementById('create-btn');
-
-const taskListContainer = document.getElementById('task-list');
-
-createBtn.addEventListener('click', createTask);
-
-function createTask() {
-  const currentDate = new Date().toISOString();
-  taskList.push({
-    ...task,
-    id: Date.now(),
-    createdAt: currentDate,
-    updatedAt: currentDate,
+    userNames.forEach(renderUsersTable);
+  })
+  .catch((err) => {
+    console.error(err);
   });
 
-  const taskCard = document.createElement('div');
-  taskCard.className = 'task-card';
-  taskCard.textContent = 'New task';
+function renderUserList(user) {
+  const userLi = document.createElement('li');
+  userLi.textContent = `${user.name} | ${user.phone}`;
 
-  taskListContainer.append(taskCard);
+  const usersUl = document.querySelector('#users');
+  usersUl.append(userLi);
 }
+
+function renderUsersTable(user) {
+  const userTr = document.createElement('tr');
+
+  const userNameTd = document.createElement('td');
+  userNameTd.textContent = user.name;
+
+  const userPhoneTd = document.createElement('td');
+  userPhoneTd.textContent = user.phone;
+
+  userTr.append(userNameTd);
+  userTr.append(userPhoneTd);
+
+  const users = document.querySelector('#users');
+  users.append(userTr);
+}
+
+const getTime = () => {
+  return `${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`;
+};
+
+function renderTime() {
+  const time = document.querySelector('#clock');
+  const currentDate = getTime();
+  time.textContent = currentDate;
+
+  setInterval(() => {
+    const currentDate = getTime();
+
+    time.textContent = currentDate;
+  }, 1000);
+}
+
+renderTime();

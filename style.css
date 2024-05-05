@@ -11,38 +11,33 @@ body {
 }
 
 .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   background-color: lightgray;
   padding: 0 16px;
 }
 
-.task-list {
-  padding: 16px 16px 0 16px;
-  display: flex;
-  flex-grow: 1;
-  flex-wrap: wrap;
-  gap: 8px;
+#users {
+  tr:nth-child(even) {
+    background: #ccc;
+  }
+
+  tr:nth-child(odd) {
+    background: #fff;
+  }
 }
 
-.task-card {
-  height: 140px;
-  width: 100px;
-  border-radius: 8px;
-  border: 1px solid gray;
-  box-shadow: slateblue;
+table,
+tr,
+td,
+th {
+  border: 1px solid black;
+  border-collapse: collapse;
 }
 
-.create-task-block {
-  display: flex;
-  column-gap: 8px;
-  padding: 16px 16px 0 16px;
-}
-
-.task-text-input {
-  display: flex;
-  flex-grow: 1;
-}
-
-.create-btn {
-  padding: 4px;
-  width: 120px;
+tr,
+td,
+th {
+  padding: 16px;
 }
